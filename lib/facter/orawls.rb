@@ -877,6 +877,16 @@ begin
       }
     end
   end
+  entries = YAML.load(File.open('/etc/shared_wls_domains.yaml'))
+  unless entries.nil?
+    domains = entries['domains']
+    unless domains.nil?
+      domains.each { |key, values|
+        Puppet.debug "found #{key} with path #{values}"
+        count_domains += get_domains(values, count_domains)
+      }
+    end
+  end
 rescue
   Puppet.debug "#{wls_domains_file} not found"
 end

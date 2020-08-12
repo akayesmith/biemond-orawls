@@ -887,7 +887,11 @@ begin
     unless domains.nil?
       domains.each { |key, values|
         Puppet.debug "found #{key} with path #{values}"
-        count_domains += get_domains(values, count_domains)
+        if (count_domains == -1) {
+          count_domains = get_domains(values, count_domains)
+        } else {
+          count_domains += get_domains(values, count_domains)
+        }
       }
     end
   end

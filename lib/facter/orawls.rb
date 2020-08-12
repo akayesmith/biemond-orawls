@@ -877,6 +877,10 @@ begin
       }
     end
   end
+rescue
+  Puppet.debug "#{wls_domains_file} not found"
+end
+begin
   entries = YAML.load(File.open('/etc/shared_wls_domains.yaml'))
   unless entries.nil?
     domains = entries['domains']
@@ -888,7 +892,7 @@ begin
     end
   end
 rescue
-  Puppet.debug "#{wls_domains_file} not found"
+  Puppet.debug "/etc/shared_wls_domains.yaml not found"
 end
 
 Facter.add('ora_mdw_domain_cnt') do

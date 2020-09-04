@@ -54,6 +54,7 @@ module Puppet
     property :jmx_platform_mbean_server_enabled
     property :jmx_platform_mbean_server_used
     property :web_app_container_show_archived_real_path_enabled
+    property :web_app_container_jsp_compiler_backwards_compatible
     property :setinternalappdeploymentondemandenable
     property :setconfigurationaudittype
     property :setconfigbackupenabled

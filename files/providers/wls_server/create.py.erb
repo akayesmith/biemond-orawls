@@ -29,6 +29,7 @@ log_redirect_stdout_to_server = '<%= log_redirect_stdout_to_server %>'
 log_date_pattern              = '<%= log_date_pattern %>'
 log_stdout_severity           = '<%= log_stdout_severity %>'
 log_log_file_severity         = '<%= log_log_file_severity %>'
+diag_image_directory          = '<%= diag_image_directory %>'
 
 restart_max       = '<%= restart_max %>'
 listenAddress     = '<%= listenaddress %>'
@@ -40,6 +41,9 @@ sslhostnameverifier = '<%= sslhostnameverifier %>'
 two_way_ssl       = '<%= two_way_ssl %>'
 client_certificate_enforced = '<%= client_certificate_enforced %>'
 sslListenPort     = '<%= ssllistenport %>'
+
+# Added for FCUBS best practices
+stuck_thread_max_time = '<%= stuck_thread_max_time %>'
 useservercerts = '<%= useservercerts %>'
 
 
@@ -129,6 +133,7 @@ try:
     cd('/Servers/'+name)
     set_attribute_value('AutoRestart', auto_restart, use_default_value_when_empty)
     set_attribute_value('AutoKillIfFailed', autokillwfail, use_default_value_when_empty)
+    set_attribute_value('StuckThreadMaxTime', stuck_thread_max_time, use_default_value_when_empty)
 
     cd('/Servers/'+name+'/WebServer/'+name)
 
@@ -197,6 +202,12 @@ try:
     if default_file_store:
         cd('/Servers/'+name+'/DefaultFileStore/'+name)
         set_attribute_value('Directory', default_file_store, use_default_value_when_empty)
+
+    #FCUBS improvement
+    if diag_image_directory:
+        cd('/Servers/'+name+'/ServerDiagnosticConfig/'+name)
+        set_attribute_value('ImageDir', diag_image_directory, use_default_value_when_empty)
+
 
     cd('/')
     DOMAIN_PATH = get('RootDirectory')

@@ -2,7 +2,7 @@
 cd("/")
 m = ls('/Servers',returnMap='true')
 
-f = open_file("name;listenaddress;listenport;logintimeout;ssllistenport;sslenabled;sslhostnameverificationignored;sslhostnameverifier;two_way_ssl;client_certificate_enforced;useservercerts;machine;logfilename;log_file_min_size;log_filecount;log_rotate_logon_startup;log_rotationtype;log_rotationdir;log_number_of_files_limited;tunnelingenabled;log_http_filename;log_http_format;log_http_format_type;log_datasource_filename;classpath;arguments;jsseenabled;domain;custom_identity;custom_identity_keystore_filename;trust_keystore_file;custom_identity_alias;default_file_store;max_message_size;log_redirect_stderr_to_server;log_redirect_stdout_to_server;restart_max;log_http_file_count;log_http_number_of_files_limited;bea_home;weblogic_plugin_enabled;listenportenabled;auto_restart;autokillwfail;server_parameters;frontendhost;frontendhttpport;frontendhttpsport;log_date_pattern;log_stdout_severity;log_log_file_severity;failure_action", tmp_script)
+f = open_file("name;listenaddress;listenport;logintimeout;ssllistenport;sslenabled;sslhostnameverificationignored;sslhostnameverifier;two_way_ssl;client_certificate_enforced;useservercerts;machine;logfilename;log_file_min_size;log_filecount;log_rotate_logon_startup;log_rotationtype;log_rotationdir;log_number_of_files_limited;tunnelingenabled;log_http_filename;log_http_format;log_http_format_type;log_datasource_filename;classpath;arguments;jsseenabled;domain;custom_identity;custom_identity_keystore_filename;trust_keystore_file;custom_identity_alias;default_file_store;max_message_size;log_redirect_stderr_to_server;log_redirect_stdout_to_server;restart_max;log_http_file_count;log_http_number_of_files_limited;bea_home;weblogic_plugin_enabled;listenportenabled;auto_restart;autokillwfail;server_parameters;frontendhost;frontendhttpport;frontendhttpsport;log_date_pattern;log_stdout_severity;log_log_file_severity;failure_action;stuck_thread_max_time;diag_image_directory", tmp_script)
 for token in m:
   print '___'+token+'___'
   cd('/Servers/'+token)
@@ -13,9 +13,10 @@ for token in m:
   tunnelingenabled  = get_attribute_value('TunnelingEnabled')
   logintimeout	    = get_attribute_value('LoginTimeoutMillis')
   restart_max       = get_attribute_value('RestartMax')
-
   auto_restart      = get_attribute_value('AutoRestart')
   autokillwfail     = get_attribute_value('AutoKillIfFailed')
+  # Added for the FCUBS best practices
+  stuck_thread_max_time = get_attribute_value('StuckThreadMaxTime')
 
   # exception empty return None instead of ''
   server_parameters = str(get('Notes'))
@@ -81,6 +82,10 @@ for token in m:
   cd('/Servers/'+token+'/DefaultFileStore/'+token)
   default_file_store = get_attribute_value('Directory')
 
+ # Added for the FCUBS best practices
+  cd('/Servers/'+token+'/ServerDiagnosticConfig/'+token)
+  diag_image_directory = get_attribute_value('ImageDir')
+
   n = ls('/Servers/'+token+'/Machine')
   machine = ''
   for token2 in n.split("drw-"):
@@ -88,7 +93,7 @@ for token in m:
       if token2:
          machine = token2
 
-  add_index_entry(f, [domain+'/'+token, listenAddress, listenPort, logintimeout, sslListenPort, sslEnabled, sslHostnameVerificationIgnored, sslhostnameverifier, two_way_ssl, client_certificate_enforced, useservercerts, machine, logfilename,log_file_min_size,log_filecount,log_rotate_logon_startup,log_rotationtype,log_rotationdir,log_number_of_files_limited, tunnelingenabled,log_http_filename,log_http_format,log_http_format_type,log_datasource_filename, classpath, arguments,jsseEnabled,domain,custom_identity,custom_identity_keystore_filename,trust_keystore_file,custom_identity_alias,default_file_store,max_message_size, log_redirect_stderr_to_server, log_redirect_stdout_to_server, restart_max, log_http_file_count,log_http_number_of_files_limited, bea_home, weblogic_plugin_enabled, listenPortEnabled,auto_restart,autokillwfail,server_parameters,frontendhost,frontendhttpport,frontendhttpsport,log_date_pattern, log_stdout_severity, log_log_file_severity, failure_action])
+  add_index_entry(f, [domain+'/'+token, listenAddress, listenPort, logintimeout, sslListenPort, sslEnabled, sslHostnameVerificationIgnored, sslhostnameverifier, two_way_ssl, client_certificate_enforced, useservercerts, machine, logfilename,log_file_min_size,log_filecount,log_rotate_logon_startup,log_rotationtype,log_rotationdir,log_number_of_files_limited, tunnelingenabled,log_http_filename,log_http_format,log_http_format_type,log_datasource_filename, classpath, arguments,jsseEnabled,domain,custom_identity,custom_identity_keystore_filename,trust_keystore_file,custom_identity_alias,default_file_store,max_message_size, log_redirect_stderr_to_server, log_redirect_stdout_to_server, restart_max, log_http_file_count,log_http_number_of_files_limited, bea_home, weblogic_plugin_enabled, listenPortEnabled,auto_restart,autokillwfail,server_parameters,frontendhost,frontendhttpport,frontendhttpsport,log_date_pattern, log_stdout_severity, log_log_file_severity, failure_action,stuck_thread_max_time,diag_image_directory])
 
 f.close()
 report_back_success()

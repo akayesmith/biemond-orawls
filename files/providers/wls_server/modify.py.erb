@@ -47,6 +47,10 @@ log_filecount                 = '<%= log_filecount %>'
 log_rotate_logon_startup      = '<%= log_rotate_logon_startup %>'
 log_rotationtype              = '<%= log_rotationtype %>'
 log_rotationdir               = '<%= log_rotationdir %>'
+
+# Added for the FCUBS best practices
+diag_image_directory          = '<%= diag_image_directory %>'
+
 log_number_of_files_limited   = '<%= log_number_of_files_limited %>'
 log_redirect_stderr_to_server = '<%= log_redirect_stderr_to_server %>'
 log_redirect_stdout_to_server = '<%= log_redirect_stdout_to_server %>'
@@ -90,6 +94,9 @@ frontend_http_port             = '<%= frontendhttpport %>'
 frontend_https_port            = '<%= frontendhttpsport %>'
 
 failure_action = '<%= failure_action %>'
+
+# Added for the FCUBS best practices
+stuck_thread_max_time = '<%= stuck_thread_max_time %>'
 
 edit()
 startEdit()
@@ -159,6 +166,9 @@ try:
     set_attribute_value('AutoRestart', auto_restart, use_default_value_when_empty)
     set_attribute_value('AutoKillIfFailed', autokillwfail, use_default_value_when_empty)
 
+    # Added for the FCUBS best practices
+    set_attribute_value('StuckThreadMaxTime', stuck_thread_max_time, use_default_value_when_empty)
+
     cd('/Servers/'+name+'/WebServer/'+name)
 
     set_attribute_value('FrontendHost', frontend_host, use_default_value_when_empty)
@@ -226,6 +236,11 @@ try:
     if default_file_store:
         cd('/Servers/' + name + '/DefaultFileStore/' + name)
         set_attribute_value('Directory', default_file_store, use_default_value_when_empty)
+
+    # Added for the FCUBS best practices
+    if diag_image_directory:
+        cd('/Servers/'+name+'/ServerDiagnosticConfig/'+name)
+        set_attribute_value('ImageDir', diag_image_directory, use_default_value_when_empty)
 
     save()
     activate()

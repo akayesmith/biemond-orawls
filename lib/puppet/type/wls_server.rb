@@ -50,7 +50,7 @@ module Puppet
     property :trust_keystore_file
     property :custom_identity_keystore_filename
     property :custom_identity_alias
-
+    property :stuck_thread_max_time
     property :ssllistenport
     property :sslenabled
     property :listenaddress
@@ -61,7 +61,6 @@ module Puppet
     property :arguments
     property :bea_home
     property :logintimeout
-
     property :frontendhost
     property :frontendhttpport
     property :frontendhttpsport
@@ -79,7 +78,7 @@ module Puppet
     property :log_date_pattern
     property :log_stdout_severity
     property :log_log_file_severity
-
+    property :diag_image_directory
     property :log_http_filename
     property :log_http_format_type
     property :log_http_format

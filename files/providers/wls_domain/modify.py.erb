@@ -10,7 +10,6 @@ jpa_default_provider                               = '<%= jpa_default_provider %
 security_crossdomain                               = '<%= security_crossdomain %>'
 jmx_platform_mbean_server_enabled                  = '<%= jmx_platform_mbean_server_enabled %>'
 jmx_platform_mbean_server_used                     = '<%= jmx_platform_mbean_server_used %>'
-web_app_container_show_archived_real_path_enabled  = '<%= web_app_container_show_archived_real_path_enabled %>'
 log_filename                                       = '<%= log_filename %>'
 
 log_file_min_size                                  = '<%= log_file_min_size %>'
@@ -29,6 +28,10 @@ setconfigurationaudittype                          = '<%= setconfigurationauditt
 exalogicoptimizationsenabled                       = '<%= exalogicoptimizationsenabled %>'
 
 cdi_implicit_bean_discovery_enabled                = '<%= cdi_implicit_bean_discovery_enabled %>'
+
+# Added for the FCUBS best practices
+web_app_container_show_archived_real_path_enabled  = '<%= web_app_container_show_archived_real_path_enabled %>'
+web_app_container_jsp_compiler_backwards_compatible  = '<%= web_app_container_jsp_compiler_backwards_compatible %>'
 
 edit()
 startEdit()
@@ -66,9 +69,11 @@ try:
     set_attribute_value('PlatformMBeanServerEnabled', jmx_platform_mbean_server_enabled, use_default_value_when_empty)
     set_attribute_value('PlatformMBeanServerUsed'   , jmx_platform_mbean_server_used, use_default_value_when_empty)
 
+    # Added for the FCUBS best practices
     print "change web app container"
     cd('/WebAppContainer/' + name)
     set_attribute_value('ShowArchivedRealPathEnabled', web_app_container_show_archived_real_path_enabled, use_default_value_when_empty)
+    set_attribute_value('JSPCompilerBackwardsCompatible', web_app_container_jsp_compiler_backwards_compatible, use_default_value_when_empty)
 
     print "change cdi container"
     try:

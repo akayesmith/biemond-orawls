@@ -97,7 +97,7 @@ failure_action = '<%= failure_action %>'
 
 # Added for the FCUBS best practices
 stuck_thread_max_time = '<%= stuck_thread_max_time %>'
-
+max_stuck_thread_time = '<%= max_stuck_thread_time %>'
 edit()
 startEdit()
 
@@ -242,7 +242,7 @@ try:
     cd('/Servers/'+name+'/OverloadProtection/'+name)
     cmo.createServerFailureTrigger()
     cd('/Servers/'+name+'/OverloadProtection/'+name+'/ServerFailureTrigger/'+name)
-    set_attribute_value('MaxStuckThreadTime', stuck_thread_max_time, use_default_value_when_empty)
+    set_attribute_value('MaxStuckThreadTime', max_stuck_thread_time, use_default_value_when_empty)
 
     if diag_image_directory:
         cd('/Servers/'+name+'/ServerDiagnosticConfig/'+name)

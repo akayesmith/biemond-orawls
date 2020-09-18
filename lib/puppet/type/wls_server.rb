@@ -51,6 +51,7 @@ module Puppet
     property :custom_identity_keystore_filename
     property :custom_identity_alias
     property :stuck_thread_max_time
+    property :max_stuck_thread_time
     property :ssllistenport
     property :sslenabled
     property :listenaddress

@@ -256,7 +256,8 @@ define orawls::copydomain (
     }
 
     if $custom_trust == true {
-      $config = "-Dweblogic.ssl.JSSEEnabled=${jsse_enabled} -Dweblogic.security.SSL.enableJSSE=${jsse_enabled} -Dweblogic.security.TrustKeyStore=CustomTrust -Dweblogic.security.CustomTrustKeyStoreFileName=${trust_keystore_file} -Dweblogic.security.CustomTrustKeystorePassPhrase=${trust_keystore_passphrase} ${extra_arguments}"
+      #Added the JVM params for enabling SSL configurations
+      $config = "-Dweblogic.ssl.JSSEEnabled=${jsse_enabled} -Dweblogic.security.SSL.enableJSSE=${jsse_enabled} -Dweblogic.security.TrustKeyStore=CustomTrust -Dweblogic.security.CustomTrustKeyStoreFileName=${trust_keystore_file} -Dweblogic.security.CustomTrustKeystorePassPhrase=${trust_keystore_passphrase} -Dweblogic.security.SSL.ignoreHostnameVerification=true -Dweblogic.security.CustomTrustKeyStoreType=JKS ${extra_arguments}"
       if ($version == 1212 or $version == 1213 or $version >= 1221) {
         # remove nodemanager.properties, else it won't be updated by nodemanager
         exec { "rm ${domains_dir}/${domain_name}/nodemanager/nodemanager.properties":
@@ -271,10 +272,10 @@ define orawls::copydomain (
     else {
       $config = "-Dweblogic.ssl.JSSEEnabled=${jsse_enabled} -Dweblogic.security.SSL.enableJSSE=${jsse_enabled} ${extra_arguments}"
     }
-    $java_options = "-Dweblogic.security.CustomTrustKeyStoreType=JKS -Dweblogic.security.CustomTrustKeyStorePassPhrase=welcome -Dweblogic.security.CustomTrustKeyStoreFileName=/u01/wls_domain_home/security/truststore.jks -Dweblogic.security.TrustKeyStore=CustomTrust -Dweblogic.security.SSL.ignoreHostnameVerification=true -Dweblogic.security.SSL.enableJSSE=true -Dweblogic.ssl.JSSEEnabled=true"
+   # $java_options = "-Dweblogic.security.CustomTrustKeyStoreType=JKS -Dweblogic.security.CustomTrustKeyStorePassPhrase=welcome -Dweblogic.security.CustomTrustKeyStoreFileName=/u01/wls_domain_home/security/truststore.jks -Dweblogic.security.TrustKeyStore=CustomTrust -Dweblogic.security.SSL.ignoreHostnameVerification=true -Dweblogic.security.SSL.enableJSSE=true -Dweblogic.ssl.JSSEEnabled=true"
     exec { "execwlst ${domain_name} ${title}":
       command     => "${wlst_dir} ${download_dir}/enroll_domain_${domain_name}.py \'${weblogic_password}\'",
-      environment => ["JAVA_HOME=${jdk_home_dir}", "CONFIG_JVM_ARGS=${config}","JAVA_OPTIONS=${java_options}"],
+      environment => ["JAVA_HOME=${jdk_home_dir}", "CONFIG_JVM_ARGS=${config}"],
       path        => $exec_path,
       user        => $os_user,
       group       => $os_group,

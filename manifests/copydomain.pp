@@ -272,7 +272,6 @@ define orawls::copydomain (
     else {
       $config = "-Dweblogic.ssl.JSSEEnabled=${jsse_enabled} -Dweblogic.security.SSL.enableJSSE=${jsse_enabled} ${extra_arguments}"
     }
-   # $java_options = "-Dweblogic.security.CustomTrustKeyStoreType=JKS -Dweblogic.security.CustomTrustKeyStorePassPhrase=welcome -Dweblogic.security.CustomTrustKeyStoreFileName=/u01/wls_domain_home/security/truststore.jks -Dweblogic.security.TrustKeyStore=CustomTrust -Dweblogic.security.SSL.ignoreHostnameVerification=true -Dweblogic.security.SSL.enableJSSE=true -Dweblogic.ssl.JSSEEnabled=true"
     exec { "execwlst ${domain_name} ${title}":
       command     => "${wlst_dir} ${download_dir}/enroll_domain_${domain_name}.py \'${weblogic_password}\'",
       environment => ["JAVA_HOME=${jdk_home_dir}", "CONFIG_JVM_ARGS=${config}"],

@@ -207,7 +207,14 @@ try:
     #FCUBS improvement
     print("Creating the OverloadProtection Bean CREATE!!!!")
     cd('/Servers/'+name+'/OverloadProtection/'+name)
-    cmo.createServerFailureTrigger()
+    server_failure_trigger_mbean = cmo.getServerFailureTrigger()
+    if server_failure_trigger_mbean:
+        print("ServerFailureTrigger has been already created")
+    else:
+        print("Creating the server failure trigger bean")
+        cmo.createServerFailureTrigger()
+        print("CREATED THE ServerFailureTrigger")
+
     print("CREATED THE ServerFailureTrigger")
     cd('/Servers/'+name+'/OverloadProtection/'+name+'/ServerFailureTrigger/'+name)
     set_attribute_value('MaxStuckThreadTime', max_stuck_thread_time, use_default_value_when_empty)

@@ -694,10 +694,12 @@ define orawls::domain (
       if ( $domain_template == 'adf' ) {
         $rcu_domain_template = 'adf'
 
-      } elsif ( $domain_template in ['soa', 'osb', 'osb_soa_bpm', 'osb_soa', 'soa_bpm', 'bam'] ){
+      } elsif ( $domain_template in ['soa', 'osb', 'osb_soa_bpm', 'osb_soa', 'soa_bpm', 'bam','odi'] ){
         $rcu_domain_template = 'soa'
       } elsif ( $domain_template == 'wcs' ){
         $rcu_domain_template = 'wcs'
+      } elsif ( $domain_template == 'odi' ){
+        $rcu_domain_template = 'odi'
       } elsif ( $domain_template == 'forms' ){
         $rcu_domain_template = 'forms'
       } elsif ($create_rcu == undef or $create_rcu == true) {

@@ -356,7 +356,9 @@ define orawls::domain (
     $templatePagelet      = "${middleware_home_dir}/Oracle_WC1/common/templates/applications/oracle.pagelet-producer_template_11.1.1.jar"
     $templateDiscussion   = "${middleware_home_dir}/Oracle_WC1/common/templates/applications/oracle.owc_discussions_template_11.1.1.jar"
 
-    $templateUCM          = "${middleware_home_dir}/Oracle_WCC1/common/templates/applications/oracle.ucm.cs_template_11.1.1.jar"
+    #$templateUCM          = "${middleware_home_dir}/Oracle_WCC1/common/templates/applications/oracle.ucm.cs_template_11.1.1.jar"
+    #Added for OWCC domain creation
+    $templateUCM          = "${middleware_home_dir}/wccontent/common/templates/wls/oracle.ucm.cs_template.jar"
 
     if $domain_template != 'ohs_standalone' and $domain_template != 'wcs'{
       $templateFile = 'orawls/domains/domain.py.epp'
@@ -697,6 +699,8 @@ define orawls::domain (
         $rcu_domain_template = 'wcs'
       } elsif ( $domain_template == 'forms' ){
         $rcu_domain_template = 'forms'
+      } elsif ( $domain_template == 'wc_wcc_bpm' ){
+        $rcu_domain_template = 'wcc'
       } elsif ($create_rcu == undef or $create_rcu == true) {
         fail('unkown domain_template for rcu with version 1212 or 1213')
       }

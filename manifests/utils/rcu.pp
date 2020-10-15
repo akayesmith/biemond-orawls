@@ -95,6 +95,13 @@ define orawls::utils::rcu(
     $components = "-component STB ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU_APPEND ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU_VIEWER ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd}-component OPSS ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd}"
     $componentsPasswords = [$rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password]
   }
+  #Added for OWCC Domain creation
+  elsif $fmw_product == 'wcc' {
+    if $version >= 1221 {
+      $components = "-component STB ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component MDS ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component OPSS ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU_APPEND ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU_VIEWER ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component OCSSEARCH ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component OCS ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component CAPTURE ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd}"
+      $componentsPasswords = [$rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password]
+    }
+  }
   else {
     fail('Unrecognized FMW fmw_product')
   }

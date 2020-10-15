@@ -409,6 +409,9 @@ define orawls::domain (
         $wlstPath      = "${middleware_home_dir}/Oracle_OSB1/common/bin"
       }
 
+    } elsif $domain_template == 'odi' {
+      $extensionsTemplateFile = 'orawls/domains/extensions/odi_template.py.erb'
+      $wlstPath      = "${middleware_home_dir}/oracle_common/common/bin"
     } elsif $domain_template == 'osb_soa' or $domain_template == 'osb_soa_bpm' {
       $extensionsTemplateFile = 'orawls/domains/extensions/soa_osb_template.py.erb'
 

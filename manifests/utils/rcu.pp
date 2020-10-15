@@ -21,7 +21,7 @@
 #
 define orawls::utils::rcu(
   Integer $version                                     = $::orawls::weblogic::version,
-  Enum['adf','soa','mft', 'wcs', 'forms'] $fmw_product = 'adf',
+  Enum['adf','soa','mft', 'wcs', 'forms', 'wcc'] $fmw_product = 'adf',
   String $oracle_fmw_product_home_dir                  = undef,
   String $jdk_home_dir                                 = $::orawls::weblogic::jdk_home_dir,
   String $os_user                                      = $::orawls::weblogic::os_user,

@@ -96,9 +96,8 @@ define orawls::utils::rcu(
     $componentsPasswords = [$rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password]
   }
   elsif $fmw_product == 'odi' {
-    $components = "-useSamePasswordForAllSchemaUsers true -component STB ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component ODI  ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU_VIEWER ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd}-component OPSS ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd}"
-    #$componentsPasswords = [$rcu_password, $rcu_password,  $rcu_password, $rcu_password,ODI_SCHEMA_PASSWORDS,SUPERVISOR_PASSWORD,D,WORK_REPOSITORY,WORK_REPOSITORY_PASSWORD,ENCRYPTION]
-    $componentsPasswords = [$rcu_password,$rcu_password,$rcu_password,'D',"${rcu_prefix}_ODI_REPO",$rcu_password,'AES-128']
+    $components = "-useSamePasswordForAllSchemaUsers true -component STB ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component ODI  ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU_APPEND ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU_VIEWER ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd}-component OPSS ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd}"
+    $componentsPasswords = [$rcu_password,$rcu_password,'D',"${rcu_prefix}_ODI_REPO",$rcu_password,'AES-128']
   }
   else {
     fail('Unrecognized FMW fmw_product')

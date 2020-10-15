@@ -98,7 +98,7 @@ define orawls::utils::rcu(
   #Added for OWCC Domain creation
   elsif $fmw_product == 'wcc' {
     if $version >= 1221 {
-      $components = "-component STB ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component MDS ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component OPSS ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU_APPEND ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU_VIEWER ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component OCSSEARCH ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component OCS ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component CAPTURE ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd}"
+      $components = "-component STB ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component MDS ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component OPSS ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU_APPEND ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component IAU_VIEWER ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component CONTENTSEARCH ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component CONTENT ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd} -component CAPTURE ${rcu_temp_tablespace_cmd} ${rcu_tablespace_cmd}"
       $componentsPasswords = [$rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password, $rcu_password]
     }
   }
